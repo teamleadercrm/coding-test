@@ -29,5 +29,5 @@ You can assume these are in the format of the real external API.
 ## Procedure
 
 We would like you to send us (a link to) a git repository (that we can access).  
-We also need some documentation on how to run your service and how we can verify it will still run after we made some changes to it).  
+We also need some documentation on how to run your app and how we can verify it will still run after we made some changes to it).  
 There is no time limit on this exercise, just take as long as you need to show us your development skills.
