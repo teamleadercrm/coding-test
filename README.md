@@ -1,5 +1,4 @@
 # Coding Test
--------------
 
 In order to gain insights in your development skills, we created this development exercise.
 
