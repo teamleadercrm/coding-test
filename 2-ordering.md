@@ -22,3 +22,7 @@ In the [data](./data/) directory, you can find source files for customer data an
 You can assume these are in the format of the real external API.
 
 To place the order, just log it on the console, but make sure we can plug in the real api endpoint easily.
+
+---
+
+_By the way, have you checked the general guidelines for our coding test? You cand find them [here](./README.md)_
