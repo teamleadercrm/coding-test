@@ -22,4 +22,4 @@ In the [data](./data/) directory, you can find source files for customer data an
 You can assume these are in the format of the real external API.
 
 
-By the way, have you checked the general guidelines for our coding test? You cand find them [here](./readme.md)
+By the way, have you checked the general guidelines for our coding test? You cand find them [here](./README.md)
