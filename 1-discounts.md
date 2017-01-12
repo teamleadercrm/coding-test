@@ -21,5 +21,6 @@ How the discounts are returned, is up to you. But make sure the reasons for the 
 In the [data](./data/) directory, you can find source files for customer data and product data.
 You can assume these are in the format of the real external API.
 
+---
 
-By the way, have you checked the general guidelines for our coding test? You cand find them [here](./README.md)
+_By the way, have you checked the general guidelines for our coding test? You cand find them [here](./README.md)_
