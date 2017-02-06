@@ -120,16 +120,16 @@ class Manager
     }
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getCategories(): array
+    public function getCategories(): Collection
     {
         $shopping_cart = $this->items->all();
         $all_products  = $this->products->all();
         $categories    = array_intersect_key($all_products, $shopping_cart);
         unset($shopping_cart, $all_products);
 
-        return array_column($categories, 'category', 'id');
+        return collect(array_column($categories, 'category', 'id'));
     }
 
     public function getDiscount()
