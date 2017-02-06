@@ -14,5 +14,6 @@ use Illuminate\Http\Request;
  */
 
 Route::group(['prefix' => 'v1', 'middleware' => 'throttle:120'], function () {
+    Route::post('/', 'DiscountController@input');
 
 });

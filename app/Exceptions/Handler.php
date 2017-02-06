@@ -46,16 +46,16 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
-            $conversionPath = route('romanToArabic', ['integer' => 1]);
-            $top10Path      = route('top10');
-            $recentPath     = route('recent');
+        // if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+        //     $conversionPath = route('romanToArabic', ['integer' => 1]);
+        //     $top10Path      = route('top10');
+        //     $recentPath     = route('recent');
 
-            return $this->error('resource_not_found',
-                404,
-                compact('conversionPath', 'top10Path', 'recentPath')
-            );
-        }
+        //     return $this->error('resource_not_found',
+        //         404,
+        //         compact('conversionPath', 'top10Path', 'recentPath')
+        //     );
+        // }
 
         return parent::render($request, $exception);
     }
