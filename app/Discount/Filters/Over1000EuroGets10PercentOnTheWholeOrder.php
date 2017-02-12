@@ -31,9 +31,9 @@ class Over1000EuroGets10PercentOnTheWholeOrder implements PossibleWaysOfGettingA
      */
     protected $total_set;
     /**
-     * @var array
+     * @var string
      */
-    protected $unit_price;
+    protected $unit_price_set;
     /**
      * @var array
      */
@@ -46,15 +46,15 @@ class Over1000EuroGets10PercentOnTheWholeOrder implements PossibleWaysOfGettingA
      */
     public function __construct(Manager $manager)
     {
-        $this->manager      = $manager;
-        $this->quantity_set = $this->manager->getPrefix() . ':product:quantity';
-        $this->total_set    = $this->manager->getPrefix() . ':product:total';
-        $this->unit_price   = $this->manager->getRedisData('product:price');
+        $this->manager        = $manager;
+        $this->quantity_set   = $this->manager->getPrefix() . ':product:quantity';
+        $this->total_set      = $this->manager->getPrefix() . ':product:total';
+        $this->unit_price_set = 'product:price';
 
         $this->initial = $this->manager->mergeByProductId(
             $this->manager->getRedisData($this->quantity_set),
             $this->manager->getRedisData($this->total_set),
-            $this->unit_price,
+            $this->manager->getRedisData($this->unit_price_set),
             $this->getOrderDetails()
         );
     }
@@ -86,7 +86,7 @@ class Over1000EuroGets10PercentOnTheWholeOrder implements PossibleWaysOfGettingA
     public function hasDiscount()
     {
         if ($this->getTotal() > 1000) {
-            return $this->manager->toPrice(0.1 * $this->getTotal());
+            return $this->manager->toPrice(0.10 * $this->getTotal());
         }
 
         return false;
@@ -105,7 +105,7 @@ class Over1000EuroGets10PercentOnTheWholeOrder implements PossibleWaysOfGettingA
         return $this->manager->mergeByProductId(
             $this->manager->getRedisData($this->quantity_set),
             $this->manager->getRedisData($this->total_set),
-            $this->unit_price,
+            $this->manager->getRedisData($this->unit_price_set),
             $this->getOrderDetails($this->manager->toPrice(0.9 * $this->getTotal()))
         );
     }

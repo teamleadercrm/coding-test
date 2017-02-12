@@ -67,6 +67,7 @@ class DiscountController extends Controller
 
                 $pipe->zadd($prefix . ':product:quantity', $quantity, $item['product-id']);
                 $pipe->zadd($prefix . ':product:total', $total, $item['product-id']);
+                $pipe->sadd($prefix . ':products', $item['product-id']);
             }
         });
 

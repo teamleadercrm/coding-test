@@ -16,14 +16,24 @@ abstract class ManagerInit
     protected $customers;
 
     /**
+     * @param $zset
+     * @return array
+     */
+    public function getRedisData($zset): array
+    {
+        $count = Redis::command('ZCARD', [$zset]) - 1;
+
+        return Redis::command('ZRANGE', [$zset, 0, $count, 'WITHSCORES']);
+    }
+    /**
      * @param $set
      * @return array
      */
-    public function getRedisData($set): array
+    public function getRedisSetData($set): array
     {
-        $count = Redis::command('ZCARD', [$set]) - 1;
+        $data = Redis::command('SSCAN', [$set, 0, 'COUNT', 10000]);
 
-        return Redis::command('ZRANGE', [$set, 0, $count, 'WITHSCORES']);
+        return $data[1] ?? [];
     }
 
     /**
@@ -55,7 +65,7 @@ abstract class ManagerInit
      */
     public function toPrice($float)
     {
-        return sprintf("%.2f", $float);
+        return floatval(floor($float * 100) / 100);
     }
 
     /**

@@ -7,7 +7,7 @@ use App\Contracts\PossibleWaysOfGettingADiscount;
 use App\Discount\Manager;
 use Illuminate\Support\Facades\Redis;
 
-class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, DiscountMessage
+class BuyToolsGet20PercentOnCheapest implements PossibleWaysOfGettingADiscount, DiscountMessage
 {
 
     /**
@@ -39,17 +39,19 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
      */
     protected $initial;
 
-    const CATEGORY_ID = 2;
+    const CATEGORY_ID = 1;
 
     /**
      * @param Manager $manager
      */
     public function __construct(Manager $manager)
     {
-        $this->manager        = $manager;
-        $this->quantity_set   = $this->manager->getPrefix() . ':product:quantity';
-        $this->total_set      = $this->manager->getPrefix() . ':product:total';
-        $this->unit_price_set = 'product:price';
+        $this->manager           = $manager;
+        $this->quantity_set      = $this->manager->getPrefix() . ':product:quantity';
+        $this->total_set         = $this->manager->getPrefix() . ':product:total';
+        $this->unit_price_set    = 'product:price';
+        $this->products          = $this->manager->getPrefix() . ':products';
+        $this->category_products = $this->manager->getPrefix() . ':products:category:' . self::CATEGORY_ID;
 
         $this->initial = $this->manager->mergeByProductId(
             $this->manager->getRedisData($this->quantity_set),
@@ -73,12 +75,13 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
     }
 
     /**
-     * Products id that have quantity gte 5
+     * Products that belong to category Tools
      * @return array products id
      */
     public function theProducts(): array
     {
-        return Redis::command('ZRANGEBYSCORE', [$this->quantity_set, 5, '+INF', 'WITHSCORES']);
+        Redis::command('SINTERSTORE', [$this->category_products, $this->products, 'product:category:' . self::CATEGORY_ID]);
+        return $this->manager->getRedisSetData($this->category_products);
     }
 
     /**
@@ -90,15 +93,26 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
         if (empty($products = $this->theProducts())) {
             return false;
         }
-        $applies_for = [];
-        foreach ($products as $product_id => $quantity) {
-            if (Redis::command('SISMEMBER', ['product:category:' . self::CATEGORY_ID, $product_id])) {
-                $applies_for[$product_id] = intval(floor($quantity / 5));
-            }
+        if (count($products) < 2) {
+            return false;
+        }
+
+        $data = [];
+        //we cannot use ZRANGE
+        foreach ($products as $product) {
+            $data[$product] = $this->manager->toPrice(Redis::command('ZSCORE', ['product:price', $product]));
         }
         unset($products);
+        asort($data);
 
-        return $applies_for;
+        foreach ($data as $product_id => $unit_price) {
+            $quantity  = Redis::command('ZSCORE', [$this->quantity_set, $product_id]);
+            $new_price = $this->manager->toPrice(0.8 * $quantity * $unit_price);
+            Redis::command('ZREM', [$this->total_set, $product_id]);
+            Redis::command('ZADD', [$this->total_set, $new_price, $product_id]);
+
+            return [$product_id => $new_price];
+        }
     }
 
     /**
@@ -107,14 +121,9 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
      */
     public function withDiscount()
     {
-        if (empty($discounts = $this->hasDiscount())) {
+        if (empty($discount = $this->hasDiscount())) {
             return [];
         }
-        Redis::pipeline(function ($pipe) use ($discounts) {
-            foreach ($discounts as $product_id => $discount) {
-                $pipe->zincrby($this->quantity_set, $discount, $product_id);
-            }
-        });
 
         return $this->manager->mergeByProductId(
             $this->manager->getRedisData($this->quantity_set),
@@ -131,7 +140,7 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
     public function definition()
     {
         return [
-            'reason'        => 'For every products of category "Switches" (id 2), when you buy five, you get a sixth for free',
+            'reason'        => 'If you buy two or more products of category "Tools" (id 1), you get a 20% discount on the cheapest product',
             'initial'       => $this->initial,
             'discount'      => $this->hasDiscount(),
             'with_discount' => $this->withDiscount()
@@ -140,6 +149,6 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
 
     public function shortKeyName()
     {
-        return 'switches_5_plus_1';
+        return 'buy_two_distinct_tools_get_20_percent_on_cheapest';
     }
 }

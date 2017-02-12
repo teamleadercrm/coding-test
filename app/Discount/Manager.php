@@ -99,14 +99,6 @@ class Manager extends ManagerInit
         return $data;
     }
 
-    /**
-     * @param float $value
-     */
-    public function updateTotal(float $value)
-    {
-        $this->order['total'] = $value;
-    }
-
     public function getDiscount()
     {
         return response()->json($this->loadRules());
