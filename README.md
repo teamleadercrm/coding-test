@@ -11,7 +11,7 @@
 `REDIS_PORT=6379`
 
 ##Usage
-POST `http://coding.dev/api/v1/` Body raw:
+POST `http://[APP_URL]/api/v1/` Body raw:
 `{
   "id": "3",
   "customer-id": "3",
