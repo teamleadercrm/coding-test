@@ -1,21 +1,72 @@
-# Coding Test
+##Requirements:
+* Redis 2.3+
+* PHP 7+
+* Laravel 5.3 server requirements https://laravel.com/docs/5.3#server-requirements
 
-In order to gain insights in your development skills, we created this development exercise.
+##Installation:
+* `composer install`
+* set redis credentials on .env file 
+`REDIS_HOST=127.0.0.1`
+`REDIS_PASSWORD=null`
+`REDIS_PORT=6379`
 
-## What to do?
+##Usage
+POST `http://coding.dev/api/v1/` Body raw:
+`{
+  "id": "3",
+  "customer-id": "3",
+  "items": [
+    {
+      "product-id": "B101",
+      "quantity": "5",
+      "unit-price": "9.75",
+      "total": "48.75"
+    },
+    {
+      "product-id": "B102",
+      "quantity": "10",
+      "unit-price": "49.50",
+      "total": "495.0"
+    },
+    {
+      "product-id": "A101",
+      "quantity": "2000",
+      "unit-price": "9.75",
+      "total": "19500"
+    },
+    {
+      "product-id": "A102",
+      "quantity": "1",
+      "unit-price": "49.50",
+      "total": "49.50"
+    }
+  ],
+  "total": "20093.25"
+}`
 
-We have several problems to solve. Our recruiter would have normally told you which one(s) to solve.
-You are free to use whatever technologies you want, unless instructed otherwise.
+# Problem 1 : Discounts
 
-- [Problem 1 : Discounts](./1-discounts.md)
-- [Problem 2 : Ordering](./2-ordering.md)
+We need you to build us a small (micro)service that calculates discounts for orders.
 
-## Procedure
+## How discounts work
 
-We would like you to send us (a link to) a git repository (that we can access).  
-We also need some documentation on how to run your app and how we can verify it will still run after we made some changes to it).  
-There is no time limit on this exercise, just take as long as you need to show us your development skills.
+For now, there are three possible ways of getting a discount:
 
-## Problems?
+- A customer who has already bought for over € 1000, gets a discount of 10% on the whole order.
+- For every products of category "Switches" (id 2), when you buy five, you get a sixth for free.
+- If you buy two or more products of category "Tools" (id 1), you get a 20% discount on the cheapest product.
 
-Feel free to contact us if something is not clear.
+By the way: there may become more ways of granting customers discounts in the future.
+
+## APIs
+
+In the [example-orders](./example-orders/) directory, you can find a couple of example orders.
+We would like to send them to your service in this form.
+How the discounts are returned, is up to you. But make sure the reasons for the discounts are transparent.
+
+In the [data](./data/) directory, you can find source files for customer data and product data.
+You can assume these are in the format of the real external API.
+
+---
+
+_By the way, have you checked the general guidelines for our coding test? You cand find them [here](./README.md)_
