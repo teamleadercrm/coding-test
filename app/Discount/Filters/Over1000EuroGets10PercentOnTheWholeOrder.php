@@ -7,7 +7,7 @@ use App\Contracts\PossibleWaysOfGettingADiscount;
 use App\Discount\Manager;
 use Illuminate\Support\Facades\Redis;
 
-class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, DiscountMessage
+class Over1000EuroGets10PercentOnTheWholeOrder implements PossibleWaysOfGettingADiscount, DiscountMessage
 {
 
     /**
@@ -59,8 +59,15 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
         );
     }
 
-    public function getOrderDetails()
+    /**
+     * @param $new_total
+     */
+    public function getOrderDetails($new_total = null)
     {
+        if (!empty($new_total)) {
+            return array_merge($this->manager->getOrder(), ['total' => $new_total]);
+
+        }
         return array_merge($this->manager->getOrder(), ['total' => $this->getTotal()]);
     }
 
@@ -73,32 +80,16 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
     }
 
     /**
-     * Products id that have quantity gte 5
-     * @return array products id
-     */
-    public function theProducts(): array
-    {
-        return Redis::command('ZRANGEBYSCORE', [$this->quantity_set, 5, '+INF', 'WITHSCORES']);
-    }
-
-    /**
      * Check if discount applies
-     * @return array|false
+     * @return float|false
      */
     public function hasDiscount()
     {
-        if (empty($products = $this->theProducts())) {
-            return false;
+        if ($this->getTotal() > 1000) {
+            return $this->manager->toPrice(0.1 * $this->getTotal());
         }
-        $applies_for = [];
-        foreach ($products as $product_id => $quantity) {
-            if (Redis::command('SISMEMBER', ['product:category:' . self::CATEGORY_ID, $product_id])) {
-                $applies_for[$product_id] = intval(floor($quantity / 5));
-            }
-        }
-        unset($products);
 
-        return $applies_for;
+        return false;
     }
 
     /**
@@ -107,20 +98,15 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
      */
     public function withDiscount()
     {
-        if (empty($discounts = $this->hasDiscount())) {
+        if (!$this->hasDiscount()) {
             return [];
         }
-        Redis::pipeline(function ($pipe) use ($discounts) {
-            foreach ($discounts as $product_id => $discount) {
-                $pipe->zincrby($this->quantity_set, $discount, $product_id);
-            }
-        });
 
         return $this->manager->mergeByProductId(
             $this->manager->getRedisData($this->quantity_set),
             $this->manager->getRedisData($this->total_set),
             $this->unit_price,
-            $this->getOrderDetails()
+            $this->getOrderDetails($this->manager->toPrice(0.9 * $this->getTotal()))
         );
     }
 
@@ -131,7 +117,7 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
     public function definition()
     {
         return [
-            'reason'        => 'For every products of category "Switches" (id 2), when you buy five, you get a sixth for free',
+            'reason'        => 'A customer who has already bought for over € 1000, gets a discount of 10% on the whole order',
             'initial'       => $this->initial,
             'discount'      => $this->hasDiscount(),
             'with_discount' => $this->withDiscount()
@@ -140,6 +126,6 @@ class CategorySwitches5Plus1 implements PossibleWaysOfGettingADiscount, Discount
 
     public function shortKeyName()
     {
-        return 'switches_5_plus_1';
+        return 'over_1000_euro_discount_10_percent_whole_order';
     }
 }

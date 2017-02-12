@@ -5,34 +5,27 @@ namespace App\Discount;
 use App\Exceptions\MissingDiscountFilters;
 use App\ExternalData;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Redis;
 use Symfony\Component\Finder\Finder;
 
-class Manager
+class Manager extends ManagerInit
 {
     /**
      * @var array
      */
     protected $order = [];
     /**
-     * @var Collection
+     * @var string
      */
-    protected $items;
-    /**
-     * @var Collection
-     */
-    protected $products;
-    /**
-     * @var Collection
-     */
-    protected $customers;
+    protected $redis_prefix;
+
     /**
      * @param array $order
-     * @param Collection $items
      */
-    public function __construct(array $order, Collection $items)
+    public function __construct(array $order, string $redis_prefix)
     {
-        $this->order = $order;
-        $this->items = $items;
+        $this->order        = $order;
+        $this->redis_prefix = $redis_prefix;
     }
 
     /**
@@ -44,46 +37,27 @@ class Manager
     }
 
     /**
-     * @return Collection
+     * @return array
      */
-    public function getItems(): Collection
+    public function getPrefix(): string
     {
-        return $this->items;
+        return $this->redis_prefix;
     }
 
     /**
-     * @return Collection
+     * @return array
      */
-    public function getProducts(): Collection
+    public function getProducts(): array
     {
         return $this->products;
     }
 
     /**
-     * @return Collection
+     * @return array
      */
-    public function getCustomers(): Collection
+    public function getCustomers(): array
     {
         return $this->customers;
-    }
-
-    /**
-     * @param Collection $products
-     */
-    public function setProducts(Collection $products)
-    {
-        $this->products = $products;
-
-        return $this;
-    }
-    /**
-     * @param Collection $customers
-     */
-    public function setCustomers(Collection $customers)
-    {
-        $this->customers = $customers;
-
-        return $this;
     }
 
     /**
@@ -92,8 +66,17 @@ class Manager
     public function loadRules(): array
     {
         $dir    = __DIR__ . '/Filters';
-        $finder = Finder::create()->files()->name('*.php')->in($dir);
-        $data   = [];
+        $finder = Finder::create()
+            ->files()
+            ->name('*.php')
+            ->in($dir)
+        //Sort by filename length ASC
+            ->sort(
+                function ($a, $b) {
+                    return strlen($a->getFilename()) <=> strlen($b->getFilename());
+                }
+            );
+        $data = [];
         if (0 === $finder->count()) {
             throw new MissingDiscountFilters;
         }
@@ -102,10 +85,15 @@ class Manager
             $class     = '\App\Discount\Filters\\' . $className;
             $filter    = new $class($this);
             if ($filter->hasDiscount()) {
-                $this->updateTotal($filter->withDiscount());
                 $data[$filter->shortKeyName()] = $filter->definition();
             }
         }
+        //delete temp redis key
+        Redis::command('DEL', [
+            $this->getPrefix() . ':product:quantity',
+            $this->getPrefix() . ':product:total'
+        ]);
+        //GC
         unset($finder, $dir, $filter);
 
         return $data;
@@ -119,29 +107,8 @@ class Manager
         $this->order['total'] = $value;
     }
 
-    /**
-     * @return Collection
-     */
-    public function getCategories(): Collection
-    {
-        $shopping_cart = $this->items->all();
-        $all_products  = $this->products->all();
-        $categories    = array_intersect_key($all_products, $shopping_cart);
-        unset($shopping_cart, $all_products);
-
-        return collect(array_column($categories, 'category', 'id'));
-    }
-
     public function getDiscount()
     {
-        // dd($this->getCategories());
-        dd($this->loadRules());
-        dd(
-            $this->order,
-            $this->items,
-            $this->products,
-            $this->customers
-        );
-        return 'DISCOUNT';
+        return response()->json($this->loadRules());
     }
 }

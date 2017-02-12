@@ -6,6 +6,8 @@ use App\Discount\Manager;
 use App\Exceptions\EmptySource;
 use App\ExternalData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Str;
 
 class DiscountController extends Controller
 {
@@ -51,13 +53,24 @@ class DiscountController extends Controller
             return $this->error('empty_data');
         }
 
-        if (empty($items = $inputRaw['items'] ?? null)) {
+        if (empty($inputRaw['items'])) {
             return $this->error('empty_shopping_cart');
         }
-        $items = collect($items)->keyBy('product-id');
+        $original_items = $inputRaw['items'];
         unset($inputRaw['items']);
+        $prefix = Str::quickRandom(8);
 
-        $discountManager = (new Manager($inputRaw, $items))
+        Redis::pipeline(function ($pipe) use ($original_items, $prefix) {
+            foreach ($original_items as $item) {
+                $quantity = intval($item['quantity']);
+                $total    = floatval($item['total']);
+
+                $pipe->zadd($prefix . ':product:quantity', $quantity, $item['product-id']);
+                $pipe->zadd($prefix . ':product:total', $total, $item['product-id']);
+            }
+        });
+
+        $discountManager = (new Manager($inputRaw, $prefix))
             ->setProducts($this->products)
             ->setCustomers($this->customers)
         ;

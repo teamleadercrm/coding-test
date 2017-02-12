@@ -59,13 +59,11 @@ class ExternalData
      */
     public function __call($file, $arguments)
     {
-        return Cache::remember($file, env('EXTERNAL_CACHE', 10), function () use ($file) {
-            if (!$data = json_decode(file_get_contents($this->data[$file . '.json']), true)) {
-                throw new EmptySource("{$file}");
-            }
+        if (!$data = json_decode(file_get_contents($this->data[$file . '.json']), true)) {
+            throw new EmptySource("{$file}");
+        }
 
-            return collect($data)->keyBy('id');
-        });
+        return $data;
     }
 
 }
