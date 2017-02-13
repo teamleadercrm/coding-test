@@ -86,12 +86,16 @@ class Manager extends ManagerInit
             $filter    = new $class($this);
             if ($filter->hasDiscount()) {
                 $data[$filter->shortKeyName()] = $filter->definition();
+                if ('buy_two_distinct_tools_get_20_percent_on_cheapest' == $filter->shortKeyName()) {
+                    Redis::command('DEL', [$this->getPrefix() . ':products:category:' . $filter::CATEGORY_ID]);
+                }
             }
         }
         //delete temp redis key
         Redis::command('DEL', [
             $this->getPrefix() . ':product:quantity',
-            $this->getPrefix() . ':product:total'
+            $this->getPrefix() . ':product:total',
+            $this->getPrefix() . ':products'
         ]);
         //GC
         unset($finder, $dir, $filter);
