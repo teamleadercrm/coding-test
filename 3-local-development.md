@@ -39,7 +39,9 @@ Some nice to haves :
 
 - a `docker-compose.yml` file for the local development environment
 - the necessary `Dockerfile`s for the images you needed to create yourself
-- documentation on how to run the project locally (and how to run some nice to have)
+- documentation on how to run the project locally
+- if you implemented nice to haves: some documentation about it
+- a list of possible improvements to the application regarding containerization for the lead developer 
 
 ---
 
