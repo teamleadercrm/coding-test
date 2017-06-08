@@ -1,7 +1,7 @@
 # Problem 3 : Local development
 
 Our developers are building a (micro)-service, that we will deploy on our `kubernetes` cluster.
-For local development, we want the enviroment to be reproducable and containerized too.
+For local development, we want the environment to be reproducible and containerized too.
 
 
 ## Starting point
@@ -20,7 +20,7 @@ You can have a look in the [`project`](./problem-3) directory of the example pro
 - a `php` backend in the [`server`](./problem-3/server) directory
 - a `javascript` frontend (in the [`client`](./problem-3/client) directory), which needs `nodejs` and `npm` during development, but can be served statically on production
 
-Next to that, the lead developer also ask for :
+Next to that, the lead developer also asks for :
 
 - a webserver, to route all trafic for the api (`/api`) to the backend
 - the `php-imagick` extension
@@ -30,7 +30,7 @@ Next to that, the lead developer also ask for :
 
 Some nice to haves :
 
-- route all trafic to `https` (definately on production)
+- route all trafic to `https` (definitely on production)
 - the ability to run `phpunit` tests inside a container
 - the ability to debug with `xdebug` inside the backend container
 
