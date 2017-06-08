@@ -1,5 +1,10 @@
 <? php
 
+require '../vendor/autoload.php';  
+ 
+use Teamleader/CodingTest/Logger;
+$logger = new Logger();
+
 // this is an example php file, so that the the project structure is clear to candidates
 
 // you may assume this code connects to some database with the following credentials
@@ -15,7 +20,7 @@ $redis_password = "admin123";
 
 // you may assume we query the database
 
-file_put_contents("logs.txt", "Queried the database" . PHP_EOL, FILE_APPEND | LOCK_EX);
+$logger->info("Queried the database");
 
 // then it returns some data
 
