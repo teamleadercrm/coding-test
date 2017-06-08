@@ -14,9 +14,9 @@
     "require": {
         "php": "^7.0",
         "ext-imagick": "*",
-        "psr/log": "*",
+        "psr/log": "^1.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "^6.2"
     }
 }
