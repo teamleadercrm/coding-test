@@ -41,7 +41,8 @@ Some nice to haves :
 - the necessary `Dockerfile`s for the images you needed to create yourself
 - documentation on how to run the project locally
 - if you implemented nice to haves: some documentation about it
-- a list of possible improvements to the application regarding containerization for the lead developer 
+- a list of possible improvements to the application regarding containerization for the lead developer  
+  (or you can make necessary changes yourself)
 
 ---
 
