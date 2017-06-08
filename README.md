@@ -9,6 +9,7 @@ You are free to use whatever technologies you want, unless instructed otherwise.
 
 - [Problem 1 : Discounts](./1-discounts.md)
 - [Problem 2 : Ordering](./2-ordering.md)
+- [Problem 3 : Local development](./3-local-development.md)
 
 ## Procedure
 
