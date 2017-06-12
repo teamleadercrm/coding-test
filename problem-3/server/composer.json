@@ -1,0 +1,22 @@
+{
+    "name": "teamleader/coding-test",
+    "description": "A coding test for Teamleader candidates",
+    "autoload": {
+        "psr-4": {
+            "Teamleader\\CodingTest\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Teamleader\\CodingTest\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.0",
+        "ext-imagick": "*",
+        "psr/log": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
+    }
+}
