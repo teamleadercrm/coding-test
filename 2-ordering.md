@@ -25,4 +25,4 @@ To place the order, just log it on the console, but make sure we can plug in the
 
 ---
 
-_By the way, have you checked the general guidelines for our coding test? You cand find them [here](./README.md)_
+_By the way, have you checked the general guidelines for our coding test? You can find them [here](./README.md)_
