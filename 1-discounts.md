@@ -21,6 +21,12 @@ How the discounts are returned, is up to you. But make sure the reasons for the 
 In the [data](./data/) directory, you can find source files for customer data and product data.
 You can assume these are in the format of the real external API.
 
+## Guidelines
+
+You are free to use any framework and packages that you like.
+
+Teamleader is quite a big application, with many developers working on the code at the same time. It is no surprise that because of this, maintainability is one of the core values of the engineering team. Keep this in mind while working on your solution.
+
 ---
 
 _By the way, have you checked the general guidelines for our coding test? You cand find them [here](./README.md)_
