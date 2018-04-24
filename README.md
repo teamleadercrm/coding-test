@@ -2,7 +2,7 @@
 
 Do you want to join the engineering team at [Teamleader](https://www.teamleader.eu/company/engineering)?
 
-In order to gain insights in your development skills, we have created this exercise.
+We have created this exercise in order to gain insights into your development skills.
 
 ## What to do?
 
