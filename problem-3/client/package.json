@@ -8,11 +8,11 @@
     "babel-loader": "^8.1.0",
     "html-webpack-plugin": "^4.5.0",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
+    "webpack-cli": "^4.0.0",
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
