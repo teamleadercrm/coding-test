@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "devDependencies": {
     "@babel/core": "^7.12.16",
-    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-env": "^7.12.16",
     "babel-loader": "^8.2.2",
     "html-webpack-plugin": "^5.0.0",
     "webpack": "^5.21.2",
