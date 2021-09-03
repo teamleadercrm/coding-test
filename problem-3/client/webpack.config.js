@@ -14,7 +14,7 @@ module.exports = {
     rules: [
       {
         test: /\.js/,
-        use: [ 'babel-loader?cacheDirectory' ],
+        use: ['babel-loader?cacheDirectory'],
         exclude: /node_modules/,
       },
     ],
@@ -25,7 +25,7 @@ module.exports = {
   devServer: {
     host: '0.0.0.0',
     port: 3000,
-    stats: 'normal',
+    hot: false,
   },
 
   plugins: [
