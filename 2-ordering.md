@@ -4,7 +4,7 @@ We need you to build us a small single page application to edit existing orders.
 
 ## How we want it to work
 
-- We need to be able to see a list of existing orders (these can be found [here](./example-orders/)) and go to there detail page.
+- We need to be able to see a list of existing orders (these can be found [here](./example-orders/)) and go to their detail page.
 - If you land on the detail page of an order, we need see its items (with description, price, ...) and total.
 - We need to be able to remove a product from the order
 - We need to be able to add an additional product to the order
