@@ -10,9 +10,6 @@ We need you to build us a small single page application to edit existing orders.
 - We need to be able to add an additional product to the order
 - We need to be able to place the order and receive a confirmation of its success (or failure)
 
-By the way: you can assume we have a html and css guru in the house, who will pimp whatever you produced to an eye-catching level.
-We need you to focus on the behavioral part.
-
 ## APIs
 
 In the [example-orders](./example-orders/) directory, you can find a couple of example orders.
