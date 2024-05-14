@@ -1,0 +1,66 @@
+.details_container {
+    padding-top: 5%;
+    width: 80%;
+    margin: auto;
+}
+
+.order_card {
+    width: 100%;
+    text-align: center;
+    font-family: arial;
+    border: solid #000;
+    border-width: 1px;
+    border-radius: 20px;
+    padding: 2%;
+    margin: auto;
+}
+
+.order_card .inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.card_text {
+    color: grey;
+    font-size: 22px;
+}
+
+.general_btn {
+    background-color: #0491aa;
+    border: none;
+    color: white;
+    padding: 10px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.place_order_btn {
+    background-color: #000000;
+    border: none;
+    color: white;
+    padding: 10px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    /* cursor: pointer; */
+}
+
+.remove_btn {
+    border: none;
+    color: red;
+    background-color: transparent;
+    text-decoration: underline;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 1%;
+}
