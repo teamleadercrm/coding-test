@@ -1,44 +1,53 @@
 {
-    "name": "ordering_test",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-        "@testing-library/jest-dom": "^5.14.1",
-        "@testing-library/react": "^13.0.0",
-        "@testing-library/user-event": "^13.2.1",
-        "@types/jest": "^27.0.1",
-        "@types/node": "^16.7.13",
-        "@types/react": "^18.0.0",
-        "@types/react-dom": "^18.0.0",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "react-scripts": "5.0.1",
-        "typescript": "^4.4.2",
-        "web-vitals": "^2.1.0"
-    },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "devDependencies": {
-        "@eslint/js": "^9.2.0",
-        "eslint": "^9.2.0",
-        "eslint-plugin-react": "^7.34.1",
-        "globals": "^15.2.0",
-        "typescript-eslint": "^7.8.0"
-    }
+	"name": "ordering_test",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@tanstack/react-query": "^5.35.5",
+		"@testing-library/jest-dom": "^5.14.1",
+		"@testing-library/react": "^15.0.7",
+		"@testing-library/user-event": "^13.2.1",
+		"@types/jest": "^27.0.1",
+		"@types/node": "^16.7.13",
+		"@types/react": "^18.3.2",
+		"@types/react-dom": "^18.3.0",
+		"lodash": "^4.17.21",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"react-modal": "^3.16.1",
+		"react-router-dom": "^6.23.1",
+		"react-scripts": "5.0.1",
+		"react-toastify": "^10.0.5",
+		"typescript": "^4.4.2",
+		"web-vitals": "^2.1.0"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"test:integration": "react-scripts test --testPathPattern='integration.test'",
+		"eject": "react-scripts eject"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.2.0",
+		"@tanstack/eslint-plugin-query": "^5.32.1",
+		"@types/lodash": "^4.17.1",
+		"@types/react-modal": "^3.16.3",
+		"eslint": "^9.2.0",
+		"eslint-plugin-react": "^7.34.1",
+		"globals": "^15.2.0",
+		"typescript-eslint": "^7.8.0"
+	}
 }
