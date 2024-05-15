@@ -1,6 +1,7 @@
 import { makeStyles } from "@mui/styles";
+import { Theme } from "@mui/material/styles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     width: "100%",
     display: "flex",
@@ -10,7 +11,10 @@ const useStyles = makeStyles({
   },
   subTitle: {
     marginLeft: "0.5rem",
+    [theme.breakpoints.down("md")]: {
+      display: "none",
+    },
   },
-});
+}));
 
 export default useStyles;
