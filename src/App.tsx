@@ -1,7 +1,13 @@
 import AppRouter from "./routes";
+import MainLayout from "./layouts";
+import { ThemeProvider } from "@mui/styles";
 
 function App() {
-  return <AppRouter />;
+  return (
+    <MainLayout>
+      <AppRouter />
+    </MainLayout>
+  );
 }
 
 export default App;
