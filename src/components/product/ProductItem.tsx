@@ -1,9 +1,9 @@
 import React from "react";
 import { Fab, ListItemText, ListItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import PriceDisplay from "../../shared/PriceDisplay";
-import useStyles from "../../styles/styles/global.styles";
 import { IProduct } from "../../models/index.model";
+import useStyles from "../../styles/global.styles";
+import PriceDisplay from "../../common/PriceDisplay";
 
 interface ProductItemProps {
   product: IProduct;
