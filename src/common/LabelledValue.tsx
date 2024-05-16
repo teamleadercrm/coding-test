@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, memo } from "react";
 import { Box, Typography, BoxProps } from "@mui/material";
 
 interface LabelledValueProps extends BoxProps {
@@ -17,4 +17,4 @@ const LabelledValue: FC<LabelledValueProps> = ({ value, label, ...props }) => {
   );
 };
 
-export default LabelledValue;
+export default memo(LabelledValue);

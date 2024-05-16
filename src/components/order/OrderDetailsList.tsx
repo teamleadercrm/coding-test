@@ -3,6 +3,7 @@ import { IOrderProductItem } from "../../models/index.model";
 import PaperWrapper from "../../common/PaperWrapper";
 import SectionTitle from "../../common/SectionTitle";
 import OrderDetailsItem from "./OrderDetailsItem";
+import { memo } from "react";
 
 interface OrderDetailsListProps {
   orderItems?: IOrderProductItem[];
@@ -35,4 +36,4 @@ const OrderDetailsList: React.FC<OrderDetailsListProps> = ({
   );
 };
 
-export default OrderDetailsList;
+export default memo(OrderDetailsList);

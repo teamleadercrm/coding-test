@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import Badge, { BadgeProps } from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
@@ -21,4 +21,4 @@ const CustomizedBadge: FC<CustomizedBadgeProps> = ({
   );
 };
 
-export default CustomizedBadge;
+export default memo(CustomizedBadge);

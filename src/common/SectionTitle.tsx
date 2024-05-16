@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Box, Typography, BoxProps, TypographyProps } from "@mui/material";
 
 interface SectionTitleProps {
@@ -22,4 +22,4 @@ const SectionTitle: FC<SectionTitleProps & BoxProps> = ({
   );
 };
 
-export default SectionTitle;
+export default memo(SectionTitle);

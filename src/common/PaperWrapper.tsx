@@ -1,4 +1,4 @@
-import { ReactNode, FC } from "react";
+import { ReactNode, FC, memo } from "react";
 import { Paper, PaperProps } from "@mui/material";
 
 interface PaperWrapperProps extends PaperProps {
@@ -18,4 +18,4 @@ const PaperWrapper: FC<PaperWrapperProps> = ({
   );
 };
 
-export default PaperWrapper;
+export default memo(PaperWrapper);

@@ -1,7 +1,7 @@
 import { SnackbarProvider } from "notistack";
 import SnackProviderWrapper from "./SnackProviderWrapper";
 import { Slide, SlideProps } from "@mui/material";
-import React from "react";
+import React, { memo } from "react";
 
 interface SnackProviderProps {
   children: React.ReactNode;
@@ -26,4 +26,4 @@ const SnackProvider: React.FC<SnackProviderProps> = ({ children }) => {
   );
 };
 
-export default SnackProvider;
+export default memo(SnackProvider);

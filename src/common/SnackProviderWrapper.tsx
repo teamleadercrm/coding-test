@@ -1,11 +1,7 @@
 import { useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
-import { useEffect, ReactNode } from "react";
-import { selectSnack } from "../store/slices/snackSlice";
-
-interface Snack {
-  text?: string;
-}
+import { useEffect, ReactNode, memo } from "react";
+import { ISnackState, selectSnack } from "../store/slices/snackSlice";
 
 interface SnackProviderWrapperProps {
   children: ReactNode;
@@ -14,7 +10,7 @@ interface SnackProviderWrapperProps {
 const SnackProviderWrapper: React.FC<SnackProviderWrapperProps> = ({
   children,
 }) => {
-  const snack: Snack = useSelector(selectSnack);
+  const snack: ISnackState = useSelector(selectSnack);
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
@@ -25,4 +21,4 @@ const SnackProviderWrapper: React.FC<SnackProviderWrapperProps> = ({
   return <>{children}</>;
 };
 
-export default SnackProviderWrapper;
+export default memo(SnackProviderWrapper);

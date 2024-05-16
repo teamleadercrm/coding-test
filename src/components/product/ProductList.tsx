@@ -3,6 +3,7 @@ import { FixedSizeList, ListChildComponentProps } from "react-window";
 import ProductItem from "./ProductItem";
 import { IProduct } from "../../models/index.model";
 import SectionTitle from "../../common/SectionTitle";
+import { memo } from "react";
 
 interface ProductListProps {
   products: IProduct[];
@@ -42,4 +43,4 @@ const ProductList: React.FC<ProductListProps> = ({
   );
 };
 
-export default ProductList;
+export default memo(ProductList);

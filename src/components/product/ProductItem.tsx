@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Fab, ListItemText, ListItem } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { IProduct } from "../../models/index.model";
@@ -41,4 +41,4 @@ const ProductItem: React.FC<ProductItemProps> = ({
   );
 };
 
-export default ProductItem;
+export default memo(ProductItem);

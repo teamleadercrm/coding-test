@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Box, SxProps } from "@mui/system";
 import { ICustomer } from "../../models/index.model";
 import PaperWrapper from "../../common/PaperWrapper";
@@ -28,4 +28,4 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ customer }) => {
   );
 };
 
-export default CustomerInfo;
+export default memo(CustomerInfo);

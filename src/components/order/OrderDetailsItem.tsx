@@ -4,6 +4,7 @@ import { IOrderProductItem } from "../../models/index.model";
 import useStyles from "../../styles/global.styles";
 import LabelledValue from "../../common/LabelledValue";
 import PriceDisplay from "../../common/PriceDisplay";
+import { memo } from "react";
 
 interface OrderDetailsItemProps {
   item?: IOrderProductItem;
@@ -44,4 +45,4 @@ const OrderDetailsItem: React.FC<OrderDetailsItemProps> = ({
   );
 };
 
-export default OrderDetailsItem;
+export default memo(OrderDetailsItem);

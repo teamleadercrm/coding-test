@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { Typography, TypographyProps } from "@mui/material";
 import { formatCurrency } from "../utils/numberUtils";
 
@@ -19,4 +19,4 @@ const PriceDisplay: FC<PriceDisplayProps> = ({ value, label, ...props }) => {
   );
 };
 
-export default PriceDisplay;
+export default memo(PriceDisplay);

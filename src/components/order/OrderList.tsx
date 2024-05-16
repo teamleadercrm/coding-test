@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Grid } from "@mui/material";
 import { IOrder } from "../../models/index.model";
 import OrderItem from "./OrderItem";
@@ -17,4 +17,4 @@ const OrderList: React.FC<OrderListProps> = ({ orders }) => {
   );
 };
 
-export default OrderList;
+export default memo(OrderList);

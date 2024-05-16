@@ -96,7 +96,6 @@ const OrderDetails: React.FC = () => {
     );
 
     if (!findedOrder) {
-      dispatch(placeOrder());
       navigate("/order");
       return;
     }

@@ -4,6 +4,7 @@ import PaperWrapper from "../../common/PaperWrapper";
 import SectionTitle from "../../common/SectionTitle";
 import LabelledValue from "../../common/LabelledValue";
 import PriceDisplay from "../../common/PriceDisplay";
+import { memo } from "react";
 
 interface OrderDetailsActionProps {
   order?: IOrder;
@@ -30,4 +31,4 @@ const OrderDetailsAction: React.FC<OrderDetailsActionProps> = ({
   );
 };
 
-export default OrderDetailsAction;
+export default memo(OrderDetailsAction);

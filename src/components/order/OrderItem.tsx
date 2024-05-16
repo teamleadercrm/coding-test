@@ -6,7 +6,7 @@ import {
   CardContent,
   Grid,
 } from "@mui/material";
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import { IOrder } from "../../models/index.model";
 import SectionTitle from "../../common/SectionTitle";
@@ -58,4 +58,4 @@ const OrderItem: React.FC<OrderItemProps> = ({ order = {} }) => {
   );
 };
 
-export default OrderItem;
+export default memo(OrderItem);
