@@ -5,7 +5,7 @@ import { Container } from "@mui/material";
 import { IOrder } from "../models/order.model";
 import { AppThunkDispatch } from "../store";
 import SectionTitle from "../common/SectionTitle";
-import OrderList from "../components/OrderList";
+import OrderList from "../components/order/OrderList";
 
 interface OrdersProps {}
 

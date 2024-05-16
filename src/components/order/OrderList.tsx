@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "@mui/material";
-import { IOrder } from "../models/index.model";
+import { IOrder } from "../../models/index.model";
 import OrderItem from "./OrderItem";
 
 interface OrderListProps {
