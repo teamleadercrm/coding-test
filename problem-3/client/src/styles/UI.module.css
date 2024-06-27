@@ -1,0 +1,16 @@
+.customerDetailsContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.whiteBg {
+  background-color: #fff;
+  border-radius: 10px;
+  color: #000;
+  margin-bottom: 8px;
+  padding: 10px 14px;
+
+  button {
+    width: 100%;
+  }
+}
