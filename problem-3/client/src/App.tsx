@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { useState, Suspense } from 'react'
+import { useState } from 'react'
 
 import { StoreContext } from './store/storeContext'
 
@@ -32,11 +32,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Dashboard />} />
-          <Route path='/orders' element={
-            <Suspense fallback={<h3>Loading...</h3>}>
-              <Orders />
-            </Suspense>
-          } />
+          <Route path='/orders' element={<Orders />} />
           <Route path='/orders/:customerDetails' element={<CustomerDetails />} />
         </Routes>
       </BrowserRouter>
