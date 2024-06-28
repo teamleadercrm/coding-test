@@ -1,33 +1,17 @@
-import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
 import { Item, Customer } from '../@types/AllTypes';
 import { StoreContext } from '../store/storeContext';
 import Products from './Products';
 import styles from '../styles/UI.module.css';
 import { ToastContainer, toast } from 'react-toastify';
+import useUserWithProducts from '../hooks/useUserWithProducts';
 
 const CustomerDetails = () => {
-  const { orders, customers, products, setOrders } = useContext(StoreContext)
-
-  const [customer, setCustomer] = useState<Customer>();
-  const [customerProducts, setCustomerProducts] = useState<Item[] | undefined>();
-  const { customerDetails } = useParams(); // Get customer name from URL
+  const [customer, customerProducts] = useUserWithProducts();
+  const { products, setOrders } = useContext(StoreContext)
   const notify = () => toast.warning('Item removed!');
-
   const totalCustomerAmount = customerProducts?.reduce((acc, val) => acc + val.total, 0)
-
-  // Set active customer 
-  useEffect(() => {
-    const customerId = customerDetails?.split('-')[1];
-    const getCustomer = customers.filter((cus) => cus.id === parseInt(customerId as string))[0]
-    setCustomer(getCustomer)
-  }, [customerDetails, customers]) // If customerDetails or customers changes, this effect will be called and get the new data
-
-  // Set active customer products
-  useEffect(() => {
-    const getCustomerOrders = orders.filter(ord => ord['customer-id'] === customer?.id)[0]?.items;
-    setCustomerProducts(getCustomerOrders);
-  }, [customer, orders])
 
   /**
    * 

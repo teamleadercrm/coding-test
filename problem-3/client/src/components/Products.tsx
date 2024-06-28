@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { StoreContext } from '../store/storeContext';
 import styles from '../styles/UI.module.css';
 import { Customer, Item, } from '../@types/AllTypes';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 type CustomerProps = {
   customer: Customer;
@@ -11,7 +11,6 @@ type CustomerProps = {
 const Products = ({ customer }: CustomerProps) => {
   const { products, setOrders } = useContext(StoreContext)
   const notify = () => toast.success('New item added!');
-
 
   const handleAddNewItem = (newItem: Item) => {
     setOrders(prevOrders => {
@@ -46,7 +45,6 @@ const Products = ({ customer }: CustomerProps) => {
 
   return (
     <div className={styles['add-more-items']}>
-      <ToastContainer />
       <p>Add more products to your orders:</p>
       <ul>
         {!!products && products.map(prod => (
