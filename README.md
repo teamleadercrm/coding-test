@@ -1,27 +1,33 @@
-# Coding Test
+# How to run
 
-Do you want to join the engineering team at [Teamleader](https://www.teamleader.eu/company/engineering)?
+## Build the service
+- `docker-compose up --build`
 
-We have created this exercise in order to gain insights into your development skills.
+## Send request
+- send POST json body request with Postman to http://localhost:9000/ e.g.
 
-## What to do?
+```json
+{
+    "id": "1",
+    "customer-id": "2",
+    "items": [
+        {
+            "product-id": "B102",
+            "quantity": "10",
+            "unit-price": "4.99",
+            "total": "49.90"
+        }
+    ],
+    "total": "49.90"
+}
+```
 
-We have several problems to solve. Our recruiter would have normally told you which one(s) to solve.
+You should get a response like:
 
-You are free to use whatever technologies you want, unless instructed otherwise.
-
-- [Problem 1 : Discounts](./1-discounts.md)
-- [Problem 2 : Ordering](./2-ordering.md)
-- [Problem 3 : Local development](./3-local-development.md)
-
-## Procedure
-
-We would like you to send us (a link to) a git repository (that we can access).  
-
-Make sure to add some documentation on how to run your app.
-
-There is no time limit on this exercise, take as long as you need to show us your development skills.
-
-## Problems?
-
-Feel free to contact us if something is not clear.
+```json
+{
+    "isDiscount": true,
+    "discountAmount": 4.99,
+    "discountReasons": "A customer who has already bought for over € 1000, gets a discount of 10% on the whole order"
+}
+```
