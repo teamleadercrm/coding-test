@@ -34,7 +34,3 @@ For our coding test, please adhere to the following guidelines to ensure your su
 - **Readable README**: Provide a README with clear, comprehensive instructions for running your solution, ensuring it can be fully operated based on the information provided.
 
 Teamleader is quite a big application, with many developers working on the code at the same time. It is no surprise that because of this, maintainability is one of the core values of the engineering team. Keep this in mind while working on your solution.
-
----
-
-_By the way, have you checked the general guidelines for our coding test? You cand find them [here](./README.md)_
