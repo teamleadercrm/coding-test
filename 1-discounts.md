@@ -2,6 +2,7 @@
 
 We need you to build us a small (micro)service that calculates discounts for orders.
 
+
 ## How discounts work
 
 For now, there are three possible ways of getting a discount:
@@ -23,7 +24,14 @@ You can assume these are in the format of the real external API.
 
 ## Guidelines
 
-You are free to use any framework and packages that you like.
+For our coding test, please adhere to the following guidelines to ensure your submission reflects our standards and best practices:
+
+- **Atomic Commits**: Ensure your commits are small and self-contained. This allows us to follow your development process step-by-step.
+- **Understanding of DDD**: Your code should demonstrate a firm grasp of Domain-Driven Design (DDD) principles, with a structure centered around the domain model.
+- **Use of Value Objects**: Incorporate ValueObjects to encapsulate domain data precisely, showcasing your understanding of DDD essentials.
+- **Exception Handling**: Your application must include robust exception handling to maintain reliability and stability.
+- **Unit Test Coverage**: Include unit tests that cover critical parts of your code, demonstrating a commitment to code quality and maintainability.
+- **Readable README**: Provide a README with clear, comprehensive instructions for running your solution, ensuring it can be fully operated based on the information provided.
 
 Teamleader is quite a big application, with many developers working on the code at the same time. It is no surprise that because of this, maintainability is one of the core values of the engineering team. Keep this in mind while working on your solution.
 
