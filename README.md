@@ -6,13 +6,9 @@ We have created this exercise in order to gain insights into your development sk
 
 ## What to do?
 
-We have several problems to solve. Our recruiter would have normally told you which one(s) to solve.
+Solve the [discounts problem](./1-discounts.md).
 
 You are free to use whatever technologies you want, unless instructed otherwise.
-
-- [Problem 1 : Discounts](./1-discounts.md)
-- [Problem 2 : Ordering](./2-ordering.md)
-- [Problem 3 : Local development](./3-local-development.md)
 
 ## Procedure
 
