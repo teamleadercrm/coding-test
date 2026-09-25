@@ -13,11 +13,16 @@ For now, there are three possible ways of getting a discount:
 
 By the way: there may become more ways of granting customers discounts in the future.
 
-## APIs
+## How we will call it
 
-In the [example-orders](./example-orders/) directory, you can find a couple of example orders.
+Two things will call your service, and both have to work.
+
+**Over HTTP.** In the [example-orders](./example-orders/) directory, you can find a couple of example orders.
 We would like to send them to your service in this form.
 How the discounts are returned, is up to you. But make sure the reasons for the discounts are transparent.
+
+**From the command line.** We also want to run this from a terminal, over a set of orders at once.
+Point it at the example orders and it should report what each one gets, and why.
 
 In the [data](./data/) directory, you can find source files for customer data and product data.
 You can assume these are in the format of the real external API.
@@ -31,6 +36,6 @@ For our coding test, please adhere to the following guidelines to ensure your su
 - **Use of Value Objects**: Incorporate ValueObjects to encapsulate domain data precisely, showcasing your understanding of DDD essentials.
 - **Exception Handling**: Your application must include robust exception handling to maintain reliability and stability.
 - **Unit Test Coverage**: Include unit tests that cover critical parts of your code, demonstrating a commitment to code quality and maintainability.
-- **Readable README**: Provide a README with clear, comprehensive instructions for running your solution, ensuring it can be fully operated based on the information provided.
+- **Readable README**: Provide a README with clear, comprehensive instructions for running your solution, both ways, ensuring it can be fully operated based on the information provided.
 
 Teamleader is quite a big application, with many developers working on the code at the same time. It is no surprise that because of this, maintainability is one of the core values of the engineering team. Keep this in mind while working on your solution.
